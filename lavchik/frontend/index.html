@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Лавчик — мини-игра</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <div class="app">
+    <div id="screen-character" class="screen active">
+      <h2 id="title-character">Персонаж</h2>
+      <div class="character">
+        <img id="character-img" src="happy.png" alt="Персонаж">
+        <p id="character-status">Он счастлив 😄</p>
+      </div>
+      <div class="needs">
+        <div>🍔 Еда: <span id="food">80</span>%</div>
+        <div>💤 Энергия: <span id="energy">60</span>%</div>
+        <div>🎮 Веселье: <span id="fun">40</span>%</div>
+      </div>
+    </div>
+
+    <div id="screen-tasks" class="screen">
+      <h2>Задания</h2>
+      <ul id="task-list"></ul>
+    </div>
+
+    <div id="screen-shop" class="screen">
+      <h2>Магазин</h2>
+      <div class="shop">
+        <div>👕 Футболка — 10 лавок</div>
+        <button onclick="buyItem('tshirt',10)">Купить</button>
+      </div>
+    </div>
+
+    <div id="screen-settings" class="screen">
+      <h2>Настройки</h2>
+      <p>Имя персонажа: <input id="char-name" placeholder="Лавчик"></p>
+      <button onclick="saveSettings()">Сохранить</button>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button onclick="showScreen('character')">👤</button>
+    <button onclick="showScreen('tasks')">🧾</button>
+    <button onclick="showScreen('shop')">🏪</button>
+    <button onclick="showScreen('settings')">⚙️</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
