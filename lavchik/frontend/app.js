@@ -9,7 +9,7 @@ let user = {
   tasks: []
 };
 
-const API_URL = "<YOUR_BACKEND_URL>"; // <- сюда вставь url твоего backend (после деплоя)
+const API_URL = "https://lav-czez.onrender.com"; // <- сюда вставь url твоего backend (после деплоя)
 
 function showScreen(name){
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -83,4 +83,5 @@ function buyItem(item, cost){
 }
 
 // init
+
 updateCharacter();
