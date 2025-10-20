@@ -47,26 +47,28 @@ h2 {
 }
 
 /* ===================== */
-/* 👤 ГЛАВНЫЙ ЭКРАН */
+/* 👤 ГЛАВНЫЙ ЭКРАН - ИСПРАВЛЕННЫЙ */
 /* ===================== */
 .character-header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   width: 100%;
+  padding: 0 10px;
 }
 
 .character-name {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 800;
   color: #2c3e50;
-  margin: 10px 0 5px 0;
+  margin: 5px 0 3px 0;
   text-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .character-status {
-  font-size: 16px;
+  font-size: 15px;
   color: #7f8c8d;
   font-style: italic;
+  margin-bottom: 5px;
 }
 
 .character-container {
@@ -77,21 +79,25 @@ h2 {
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
   margin: 0 auto;
+  padding: 0 10px;
+  min-height: auto;
 }
 
 .character-container img {
   width: 100%;
-  max-width: 300px;
+  max-width: 380px;
   height: auto;
+  max-height: 65vh;
   object-fit: contain;
   transition: transform 0.3s;
-  border-radius: 15px;
+  border-radius: 20px;
+  margin-bottom: 10px;
 }
 
 .character-container img:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .needs-overlay {
@@ -101,9 +107,9 @@ h2 {
   padding: 15px 20px;
   font-size: 16px;
   backdrop-filter: blur(10px);
-  margin-top: 20px;
+  margin-top: 10px;
   width: 100%;
-  max-width: 280px;
+  max-width: 320px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
@@ -112,13 +118,71 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-weight: 500;
 }
 
 .needs-overlay span {
   font-weight: 700;
   color: #2c3e50;
+  font-size: 17px;
 }
 
+/* Улучшаем отображение на очень высоких экранах */
+@media (min-height: 800px) {
+  .character-container img {
+    max-height: 55vh;
+  }
+}
+
+/* Для мобильных устройств */
+@media (max-width: 480px) {
+  .character-header {
+    margin-bottom: 10px;
+  }
+  
+  .character-name {
+    font-size: 24px;
+    margin: 3px 0 2px 0;
+  }
+  
+  .character-status {
+    font-size: 14px;
+    margin-bottom: 3px;
+  }
+  
+  .character-container img {
+    max-width: 95%;
+    max-height: 60vh;
+  }
+  
+  .needs-overlay {
+    max-width: 90%;
+    padding: 12px 15px;
+    margin-top: 8px;
+  }
+  
+  .needs-overlay div {
+    margin: 6px 0;
+    font-size: 15px;
+  }
+  
+  .needs-overlay span {
+    font-size: 16px;
+  }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 360px) {
+  .character-container img {
+    max-width: 92%;
+    max-height: 55vh;
+  }
+  
+  .needs-overlay {
+    max-width: 85%;
+    padding: 10px 12px;
+  }
+}
 /* ===================== */
 /* ⚙️ НАСТРОЙКИ */
 /* ===================== */
@@ -859,3 +923,4 @@ h2 {
     height: 70px;
   }
 }
+
