@@ -1,55 +1,135 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Лавчик — мини-игра</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лавчик — мини-приложение</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-  <div class="app">
-    <div id="screen-character" class="screen active">
-      <h2 id="title-character">Персонаж</h2>
-      <div class="character">
-        <img id="character-img" src="https://sun9-52.userapi.com/s/v1/ig2/s6ssftIW43qqSAEV5Lqlj9RQXkCJTehT6klFmLrqSVcdXCZ-LRD4uPNBc9UDfqUS33N-JEv5p-xblmTNcAS8QIak.jpg?quality=95&as=32x69,48x104,72x156,108x234,160x346,240x519,360x779,480x1039,540x1168,640x1385,720x1558,1080x2337&from=bu&cs=1080x0" alt="Персонаж">
-        <p id="character-status">Он счастлив 😄</p>
-      </div>
-      <div class="needs">
-        <div>🍔 Еда: <span id="food">80</span>%</div>
-        <div>💤 Энергия: <span id="energy">60</span>%</div>
-        <div>🎮 Веселье: <span id="fun">40</span>%</div>
-      </div>
-    </div>
 
+  <!-- Счётчик лавок -->
+  <div class="lavki-counter">
+    💎 <span id="lavki-amount">0</span>
+  </div>
+
+  <div class="app">
+<!-- Экран персонажа -->
+<div id="screen-character" class="screen active">
+  <div class="character-header">
+    <div class="character-name" id="character-name-display">Лавчик</div>
+    <div class="character-status" id="character-status">Счастлив и готов к приключениям! 😄</div>
+  </div>
+  
+  <div class="character-container">
+    <img id="character-img" src="images/1.png" alt="Персонаж" onerror="this.src='https://via.placeholder.com/300x300/4CAF50/white?text=🎮'">
+    <div class="needs-overlay">
+      <div>🍔 Еда: <span id="food">80</span>%</div>
+      <div>💤 Энергия: <span id="energy">60</span>%</div>
+      <div>🎮 Веселье: <span id="fun">40</span>%</div>
+    </div>
+  </div>
+</div>
+    <!-- Экран заданий -->
     <div id="screen-tasks" class="screen">
       <h2>Задания</h2>
       <ul id="task-list"></ul>
     </div>
 
+    <!-- Экран магазина -->
     <div id="screen-shop" class="screen">
       <h2>Магазин</h2>
       <div class="shop">
         <div>👕 Футболка — 10 лавок</div>
-        <button onclick="buyItem('tshirt',10)">Купить</button>
+        <button onclick="buyItem('Футболка',10)">Купить</button>
+      </div>
+      <div class="shop">
+        <div>🎁 Кружка — 50 лавок</div>
+        <button onclick="buyItem('Кружка',50)">Купить</button>
       </div>
     </div>
+<!-- Экран настроек -->
+<div id="screen-settings" class="screen">
+  <h2>⚙️ Настройки</h2>
+  
+  <div class="settings-container">
+    <!-- Секция имени персонажа -->
+    <div class="settings-section">
+      <h3>👤 Имя персонажа</h3>
+      <div class="setting-item">
+        <label for="char-name">Как зовут вашего персонажа?</label>
+        <input 
+          type="text" 
+          id="char-name" 
+          class="setting-input" 
+          placeholder="Введите имя..."
+          maxlength="20"
+        >
+      </div>
+      <button class="setting-btn" onclick="saveSettings()">
+        💾 Сохранить имя
+      </button>
+    </div>
 
-    <div id="screen-settings" class="screen">
-      <h2>Настройки</h2>
-      <p>Имя персонажа: <input id="char-name" placeholder="Лавчик"></p>
-      <button onclick="saveSettings()">Сохранить</button>
+<!-- Секция выбора персонажа -->
+<div class="settings-section">
+  <h3>🎭 Внешность персонажа</h3>
+  <div class="setting-item">
+    <label>Выберите внешность:</label>
+    <div class="character-select-grid" id="character-selector">
+      <div class="character-option" data-img="images/1.png">
+        <img src="images/1.png" alt="Персонаж 1" onerror="this.src='https://via.placeholder.com/100x100/4CAF50/white?text=1'">
+        <div class="character-checkmark">✓</div>
+      </div>
+      <div class="character-option" data-img="images/2.png">
+        <img src="images/2.png" alt="Персонаж 2" onerror="this.src='https://via.placeholder.com/100x100/2196F3/white?text=2'">
+        <div class="character-checkmark">✓</div>
+      </div>
+      <div class="character-option" data-img="images/3.png">
+        <img src="images/3.png" alt="Персонаж 3" onerror="this.src='https://via.placeholder.com/100x100/FF9800/white?text=3'">
+        <div class="character-checkmark">✓</div>
+      </div>
+      <div class="character-option" data-img="images/4.png">
+        <img src="images/4.png" alt="Персонаж 4" onerror="this.src='https://via.placeholder.com/100x100/9C27B0/white?text=4'">
+        <div class="character-checkmark">✓</div>
+      </div>
+      <div class="character-option" data-img="images/5.png">
+        <img src="images/5.png" alt="Персонаж 5" onerror="this.src='https://via.placeholder.com/100x100/607D8B/white?text=5'">
+        <div class="character-checkmark">✓</div>
+      </div>
+      <div class="character-option" data-img="images/6.png">
+        <img src="images/6.png" alt="Персонаж 6" onerror="this.src='https://via.placeholder.com/100x100/795548/white?text=6'">
+        <div class="character-checkmark">✓</div>
+      </div>
     </div>
   </div>
+</div>
 
+    <!-- Секция информации -->
+    <div class="settings-section">
+      <h3>ℹ️ Информация</h3>
+      <div class="setting-item">
+        <div style="text-align: center; color: #666; font-size: 14px; line-height: 1.6;">
+          <p>💎 Лавок заработано: <strong id="total-lavki">0</strong></p>
+          <p>✅ Заданий выполнено: <strong id="completed-tasks">0 из 0</strong></p>
+          <p>📅 Персонаж создан: <strong id="creation-date">сегодня</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  <!-- Нижняя навигация -->
   <div class="nav">
-    <button onclick="showScreen('character')">👤</button>
-    <button onclick="showScreen('tasks')">🧾</button>
-    <button onclick="showScreen('shop')">🏪</button>
-    <button onclick="showScreen('settings')">⚙️</button>
+    <button data-target="character">👤</button>
+    <button data-target="tasks">🧾</button>
+    <button data-target="shop">🏪</button>
+    <button data-target="settings">⚙️</button>
   </div>
 
   <script src="app.js"></script>
 </body>
-
 </html>
