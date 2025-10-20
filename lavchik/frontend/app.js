@@ -582,3 +582,61 @@ function showScreen(name) {
     }, 50);
   }
 }
+
+// Добавьте в app.js эту функцию
+function liftCharacterImage() {
+  const characterScreen = document.getElementById('screen-character');
+  const characterImg = document.getElementById('character-img');
+  const characterHeader = document.querySelector('.character-header');
+  
+  if (characterScreen && characterImg && characterHeader) {
+    // Минимальные отступы между именем и картинкой
+    characterHeader.style.marginBottom = '0px';
+    characterHeader.style.paddingBottom = '0px';
+    
+    // Принудительно поднимаем картинку
+    const screenHeight = window.innerHeight;
+    const navHeight = 60;
+    const headerHeight = characterHeader.offsetHeight;
+    const needsHeight = characterScreen.querySelector('.needs-overlay').offsetHeight;
+    
+    // Вычисляем доступную высоту для изображения (увеличиваем)
+    const availableHeight = screenHeight - navHeight - headerHeight - needsHeight - 10;
+    
+    // Устанавливаем максимальную высоту изображения
+    characterImg.style.maxHeight = `${Math.max(250, availableHeight)}px`;
+    
+    // Принудительно убираем любые отступы
+    characterScreen.style.gap = '0';
+    characterScreen.style.rowGap = '0';
+  }
+}
+
+// Вызываем при загрузке и изменении размера
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(liftCharacterImage, 100);
+  window.addEventListener('resize', liftCharacterImage);
+});
+
+// Обновляем функцию showScreen
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(screen => {
+    screen.classList.remove('active');
+  });
+
+  const screen = document.getElementById(`screen-${name}`);
+  if (screen) {
+    screen.classList.add('active');
+    
+    if (name === 'character') {
+      setTimeout(liftCharacterImage, 50);
+    }
+    
+    setTimeout(() => {
+      updateStats();
+      if (name === 'character') {
+        updateCharacterDisplay();
+      }
+    }, 50);
+  }
+}
