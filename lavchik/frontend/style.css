@@ -47,28 +47,29 @@ h2 {
 }
 
 /* ===================== */
-/* 👤 ГЛАВНЫЙ ЭКРАН - ИСПРАВЛЕННЫЙ */
+/* 👤 ГЛАВНЫЙ ЭКРАН - КАРТИНКА ПОДНЯТА ВЫШЕ */
 /* ===================== */
 .character-header {
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 2px;
   width: 100%;
-  padding: 0 10px;
+  padding: 8px 10px 0 10px;
+  flex-shrink: 0;
 }
 
 .character-name {
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 800;
   color: #2c3e50;
-  margin: 5px 0 3px 0;
+  margin: 0 0 1px 0;
   text-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .character-status {
-  font-size: 15px;
+  font-size: 14px;
   color: #7f8c8d;
   font-style: italic;
-  margin-bottom: 5px;
+  margin: 0;
 }
 
 .character-container {
@@ -76,45 +77,48 @@ h2 {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 0 10px;
-  min-height: auto;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .character-container img {
   width: 100%;
-  max-width: 380px;
+  max-width: 95vw;
   height: auto;
-  max-height: 65vh;
+  max-height: 78vh;
   object-fit: contain;
   transition: transform 0.3s;
-  border-radius: 20px;
-  margin-bottom: 10px;
+  border-radius: 15px;
+  margin: 0;
+  flex-shrink: 0;
 }
 
 .character-container img:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
 .needs-overlay {
   position: relative;
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 15px;
-  padding: 15px 20px;
-  font-size: 16px;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 15px;
   backdrop-filter: blur(10px);
-  margin-top: 10px;
-  width: 100%;
-  max-width: 320px;
+  margin: 5px 0 10px 0;
+  width: 90%;
+  max-width: 300px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  flex-shrink: 0;
 }
 
 .needs-overlay div {
-  margin: 8px 0;
+  margin: 6px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -124,65 +128,84 @@ h2 {
 .needs-overlay span {
   font-weight: 700;
   color: #2c3e50;
-  font-size: 17px;
+  font-size: 16px;
 }
 
-/* Улучшаем отображение на очень высоких экранах */
-@media (min-height: 800px) {
-  .character-container img {
-    max-height: 55vh;
-  }
+/* Переопределяем стили экрана для главного */
+#screen-character {
+  padding: 0;
+  justify-content: flex-start;
+  gap: 0;
 }
 
 /* Для мобильных устройств */
 @media (max-width: 480px) {
   .character-header {
-    margin-bottom: 10px;
+    margin-bottom: 1px;
+    padding: 5px 5px 0 5px;
   }
   
   .character-name {
-    font-size: 24px;
-    margin: 3px 0 2px 0;
+    font-size: 20px;
+    margin: 0;
   }
   
   .character-status {
-    font-size: 14px;
-    margin-bottom: 3px;
+    font-size: 13px;
   }
   
   .character-container img {
-    max-width: 95%;
-    max-height: 60vh;
+    max-width: 98vw;
+    max-height: 73vh;
+    border-radius: 12px;
   }
   
   .needs-overlay {
-    max-width: 90%;
-    padding: 12px 15px;
-    margin-top: 8px;
+    padding: 10px 12px;
+    margin: 3px 0 8px 0;
+    width: 85%;
+    max-width: 280px;
   }
   
   .needs-overlay div {
-    margin: 6px 0;
-    font-size: 15px;
+    margin: 5px 0;
+    font-size: 14px;
   }
   
   .needs-overlay span {
-    font-size: 16px;
+    font-size: 15px;
+  }
+  
+  #screen-character {
+    padding: 0;
   }
 }
 
 /* Для очень маленьких экранов */
 @media (max-width: 360px) {
+  .character-header {
+    padding: 3px 5px 0 5px;
+  }
+  
+  .character-name {
+    font-size: 18px;
+  }
+  
+  .character-status {
+    font-size: 12px;
+  }
+  
   .character-container img {
-    max-width: 92%;
-    max-height: 55vh;
+    max-height: 68vh;
   }
   
   .needs-overlay {
-    max-width: 85%;
-    padding: 10px 12px;
+    padding: 8px 10px;
+    margin: 2px 0 6px 0;
+    width: 80%;
   }
 }
+
 /* ===================== */
 /* ⚙️ НАСТРОЙКИ */
 /* ===================== */
@@ -923,4 +946,3 @@ h2 {
     height: 70px;
   }
 }
-
